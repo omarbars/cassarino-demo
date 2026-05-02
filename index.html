@@ -1,0 +1,618 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CASSARINO GmbH Gebäudereinigung – Bad Dürrheim, Baden-Württemberg</title>
+    <meta name="description" content="Professionelle Gebäudereinigung in Baden-Württemberg seit 2015. Büroreinigung, Unterhaltsreinigung & Glasreinigung. Jetzt kostenlos anfragen.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,600;0,700;1,600;1,700&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./style.css">
+
+    <style>
+        /* ---- Intro-Overlay (nur index.html) ---- */
+        #intro-overlay {
+            position: fixed;
+            inset: 0;
+            background: #FFFFFF;
+            z-index: 10000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            clip-path: inset(0 0 0 0%);
+            transition: clip-path 0.8s ease-in-out;
+            pointer-events: none;
+        }
+
+        #intro-overlay img {
+            width: 200px;
+            max-width: 70vw;
+            display: block;
+        }
+
+        /* Weinroter Wischer-Balken (6px breit, volle Höhe) */
+        #intro-wischer {
+            position: fixed;
+            top: 0;
+            left: -10%;
+            width: 6px;
+            height: 100vh;
+            background: #8B1A4A;
+            box-shadow: 4px 0 20px rgba(139, 26, 74, 0.55);
+            z-index: 10001;
+            transition: left 0.8s ease-in-out;
+            pointer-events: none;
+        }
+    </style>
+</head>
+<body>
+    <!-- Intro-Overlay mit Logo (nur auf der Startseite) -->
+    <div id="intro-overlay" role="presentation" aria-hidden="true">
+        <img src="./logo.webp" alt="">
+    </div>
+    <div id="intro-wischer" aria-hidden="true"></div>
+
+    <!-- ============================================================
+         TOP-BAR
+    ============================================================ -->
+    <div class="top-bar">
+        <!-- Links: E-Mail (TODO: echte E-Mail eintragen) -->
+        <div class="top-bar-item top-bar-item-email">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+                <polyline points="22,6 12,13 2,6"/>
+            </svg>
+            <!-- TODO: Echte E-Mail-Adresse eintragen -->
+            <a href="mailto:placeholder@cassarino.de">placeholder@cassarino.de</a>
+        </div>
+        <!-- Mitte: Telefon (klickbar) -->
+        <div class="top-bar-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.8 19.79 19.79 0 01.01 1.18 2 2 0 012 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 14.92v2z" transform="translate(1,1)"/>
+            </svg>
+            <a href="tel:+4917642568906">0176 42568906</a>
+        </div>
+        <!-- Rechts: Social Icons -->
+        <div class="top-bar-item">
+            <div class="social-icons">
+                <!-- Instagram – TODO: Link eintragen -->
+                <a href="https://instagram.com/TODO" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+                    <svg viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/>
+                    </svg>
+                </a>
+                <!-- Facebook – TODO: Link eintragen -->
+                <a href="https://facebook.com/TODO" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
+                    <svg viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+                    </svg>
+                </a>
+                <!-- TikTok – TODO: Link eintragen -->
+                <a href="https://tiktok.com/@TODO" target="_blank" rel="noopener noreferrer" aria-label="TikTok">
+                    <svg viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.27 6.27 0 00-.79-.05 6.34 6.34 0 00-6.34 6.34 6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.33-6.34V8.69a8.28 8.28 0 004.86 1.55V6.79a4.85 4.85 0 01-1.09-.1z"/>
+                    </svg>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- ============================================================
+         STICKY HEADER
+    ============================================================ -->
+    <header id="haupt-header">
+        <div class="header-logo">
+            <a href="./index.html">
+                <img src="./logo.webp" alt="CASSARINO GmbH Gebäudereinigung" style="max-height:60px;">
+            </a>
+        </div>
+
+        <button class="hamburger" id="hamburger" aria-label="Menü öffnen" aria-expanded="false">
+            <span></span><span></span><span></span>
+        </button>
+
+        <nav id="haupt-nav">
+            <a href="#leistungen">Leistungen</a>
+            <a href="#ueber-uns">Über uns</a>
+            <a href="#ablauf">Ablauf</a>
+            <a href="#kontakt">Kontakt</a>
+            <a href="#kontakt" class="btn-anfragen">Jetzt anfragen</a>
+        </nav>
+    </header>
+
+    <!-- ============================================================
+         HERO SLIDER (3 Slides, Auto-Play 5s, Fade)
+    ============================================================ -->
+    <section class="hero" id="start" aria-label="Hero-Slider">
+
+        <!-- Slide 1: Reinigungskraft mit Mopp -->
+        <div class="slide aktiv" role="group" aria-label="Slide 1 von 3">
+            <div class="slide-bg" style="background-image:url('https://images.unsplash.com/photo-1581578731548-c64695cc6952?w=1600');"></div>
+            <div class="slide-overlay"></div>
+            <div class="slide-content">
+                <h1>Professionelle Gebäudereinigung in Baden-Württemberg</h1>
+                <p>Zuverlässig, gründlich, seit 2015</p>
+                <div class="slide-btns">
+                    <a href="#kontakt" class="btn-gefuellt">Kostenlos anfragen</a>
+                    <a href="#leistungen" class="btn-outline-hell">Leistungen entdecken</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 2: Fensterreinigung -->
+        <div class="slide" role="group" aria-label="Slide 2 von 3">
+            <div class="slide-bg" style="background-image:url('https://images.unsplash.com/photo-1628177142898-93e36e4e3a50?w=1600');"></div>
+            <div class="slide-overlay"></div>
+            <div class="slide-content">
+                <h1>Pflege, Qualität, Verlässlichkeit</h1>
+                <p>Ihr zuverlässiger Partner für Sauberkeit und Glanz</p>
+                <div class="slide-btns">
+                    <a href="#kontakt" class="btn-gefuellt">Kostenlos anfragen</a>
+                    <a href="#leistungen" class="btn-outline-hell">Leistungen entdecken</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 3: Sauberes Büro -->
+        <div class="slide" role="group" aria-label="Slide 3 von 3">
+            <div class="slide-bg" style="background-image:url('https://images.unsplash.com/photo-1563453392212-326f5e854473?w=1600');"></div>
+            <div class="slide-overlay"></div>
+            <div class="slide-content">
+                <h1>Büroreinigung &amp; Glasreinigung aus einer Hand</h1>
+                <p>Für ein sauberes Arbeitsumfeld jeden Tag</p>
+                <div class="slide-btns">
+                    <a href="#kontakt" class="btn-gefuellt">Kostenlos anfragen</a>
+                    <a href="#leistungen" class="btn-outline-hell">Leistungen entdecken</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Punkte-Navigation -->
+        <div class="slider-punkte" role="tablist">
+            <button class="punkt aktiv" data-index="0" aria-label="Slide 1" aria-selected="true"></button>
+            <button class="punkt"       data-index="1" aria-label="Slide 2" aria-selected="false"></button>
+            <button class="punkt"       data-index="2" aria-label="Slide 3" aria-selected="false"></button>
+        </div>
+    </section>
+
+    <!-- ============================================================
+         ÜBER UNS
+    ============================================================ -->
+    <section class="sektion sektion-grau" id="ueber-uns">
+        <div class="ueber-grid">
+
+            <div class="fade-in">
+                <p class="uebertitel">_ Über CASSARINO Gebäudereinigung _</p>
+                <h2 class="sektion-h2">Was spricht für unsere Dienstleistungen?</h2>
+                <p class="ueber-text">
+                    Seit 2015 spezialisiert auf professionelle Gebäudereinigung in Baden-Württemberg.
+                    Effizient, freundlich, zuverlässig – für Gewerbe- und Wohnimmobilien.
+                    Wir garantieren Ihre Zufriedenheit.
+                </p>
+            </div>
+
+            <!-- Animierte Counter -->
+            <div class="stats-grid fade-in">
+                <div class="stat-karte">
+                    <span class="stat-zahl" data-ziel="9" data-suffix="+">0</span>
+                    <span class="stat-label">Jahre Erfahrung</span>
+                </div>
+                <div class="stat-karte">
+                    <span class="stat-zahl" data-ziel="3" data-suffix="+">0</span>
+                    <span class="stat-label">Reinigungsarten</span>
+                </div>
+                <div class="stat-karte">
+                    <span class="stat-zahl" data-ziel="100" data-suffix="%">0</span>
+                    <span class="stat-label">Zufriedenheit</span>
+                </div>
+                <div class="stat-karte">
+                    <span class="stat-zahl">BW</span>
+                    <span class="stat-label">Region</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+         LEISTUNGEN (Cards → Unterseiten, mit Nav-Übergang)
+    ============================================================ -->
+    <section class="sektion sektion-weiss" id="leistungen">
+        <div class="sektion-kopf fade-in">
+            <p class="uebertitel">_ CASSARINO Dienstleistungen _</p>
+            <h2 class="sektion-h2">Wir reinigen, damit Sie sich auf das Wesentliche konzentrieren können.</h2>
+        </div>
+
+        <div class="cards-grid">
+            <!-- Card 1 → bueroreinigung.html -->
+            <a href="./bueroreinigung.html" class="leistungs-karte fade-in" aria-label="Mehr zu Büroreinigung">
+                <svg class="karte-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <rect x="3" y="3" width="18" height="18" rx="1"/>
+                    <path d="M3 9h18M3 15h18M9 3v18M15 3v18"/>
+                </svg>
+                <h3>Büroreinigung</h3>
+                <p>Regelmäßige und zuverlässige Reinigung für ein sauberes, produktives Arbeitsumfeld.</p>
+            </a>
+
+            <!-- Card 2 → unterhaltsreinigung.html -->
+            <a href="./unterhaltsreinigung.html" class="leistungs-karte fade-in" aria-label="Mehr zu Unterhaltsreinigung">
+                <svg class="karte-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <path d="M5 20h14M7 20V8l5-5 5 5v12M9 20v-5h6v5M9 11h6"/>
+                </svg>
+                <h3>Unterhaltsreinigung</h3>
+                <p>Dauerhaft gepflegte Räumlichkeiten durch einen auf Sie abgestimmten Reinigungsrhythmus.</p>
+            </a>
+
+            <!-- Card 3 → glasreinigung.html -->
+            <a href="./glasreinigung.html" class="leistungs-karte fade-in" aria-label="Mehr zu Glasreinigung">
+                <svg class="karte-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <rect x="2" y="2" width="20" height="20" rx="2"/>
+                    <path d="M2 12h20M12 2v20"/>
+                    <path d="M17 7l-3 3M17 10l-3-3" opacity="0.5"/>
+                </svg>
+                <h3>Glasreinigung</h3>
+                <p>Streifenfreie Fenster und Glasfronten für einen professionellen ersten Eindruck.</p>
+            </a>
+        </div>
+    </section>
+
+    <!-- ============================================================
+         WARUM CASSARINO
+    ============================================================ -->
+    <section class="sektion sektion-grau" id="warum">
+        <div class="warum-grid">
+            <div class="warum-bild fade-in">
+                <img src="https://images.unsplash.com/photo-1527515545081-5db817172677?w=800" alt="Reinigungskraft bei der Arbeit">
+            </div>
+            <div class="fade-in">
+                <p class="uebertitel">_ WARUM CASSARINO _</p>
+                <h2 class="sektion-h2">Ihr Vertrauen ist unser Antrieb</h2>
+                <ul class="checklist">
+                    <li><span class="haken">✓</span><span>Effizienter Reinigungsplan</span></li>
+                    <li><span class="haken">✓</span><span>Zuverlässiger Reinigungsrhythmus</span></li>
+                    <li><span class="haken">✓</span><span>Motivierte und freundliche Mitarbeiter</span></li>
+                    <li><span class="haken">✓</span><span>Sehr gute Erreichbarkeit</span></li>
+                    <li><span class="haken">✓</span><span>Gute Ergebnisse jederzeit</span></li>
+                    <li><span class="haken">✓</span><span>Seit 2015 in Baden-Württemberg</span></li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+         ABLAUF
+    ============================================================ -->
+    <section class="sektion sektion-weiss" id="ablauf">
+        <div class="ablauf-kopf fade-in">
+            <p class="uebertitel">........ Wie Arbeiten Wir? ........</p>
+            <div class="ablauf-zitat">"CASSARINO"</div>
+            <p class="ablauf-beschreibung">Transparenter, kundenorientierter Prozess – einfach und effektiv.</p>
+        </div>
+
+        <div class="ablauf-reihe">
+            <!-- Schritt 1 -->
+            <div class="schritt fade-in">
+                <div class="schritt-kreis-wrapper">
+                    <div class="schritt-kreis">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                            <path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.8 19.79 19.79 0 01.01 1.18 2 2 0 012 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 14.92v2z" transform="translate(1,1)"/>
+                        </svg>
+                    </div>
+                    <span class="schritt-num">1</span>
+                </div>
+                <h3>Kontaktaufnahme:</h3>
+                <p>Sie sind nur einen Anruf von unserer Unterstützung entfernt.</p>
+            </div>
+
+            <div class="ablauf-linie" aria-hidden="true"></div>
+
+            <!-- Schritt 2 -->
+            <div class="schritt fade-in">
+                <div class="schritt-kreis-wrapper">
+                    <div class="schritt-kreis">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                            <line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/>
+                            <line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/>
+                        </svg>
+                    </div>
+                    <span class="schritt-num">2</span>
+                </div>
+                <h3>Auswahl der Dienstleistung:</h3>
+                <p>Gemeinsam wählen wir die passenden Leistungen für Ihre Immobilie.</p>
+            </div>
+
+            <div class="ablauf-linie" aria-hidden="true"></div>
+
+            <!-- Schritt 3 -->
+            <div class="schritt fade-in">
+                <div class="schritt-kreis-wrapper">
+                    <div class="schritt-kreis">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                            <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+                            <line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/>
+                            <line x1="3" y1="10" x2="21" y2="10"/>
+                        </svg>
+                    </div>
+                    <span class="schritt-num">3</span>
+                </div>
+                <h3>Terminauswahl:</h3>
+                <p>Flexible Terminoptionen – wir finden gemeinsam den optimalen Zeitpunkt.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+         KONTAKT
+    ============================================================ -->
+    <section class="sektion sektion-grau" id="kontakt">
+        <div class="sektion-kopf fade-in">
+            <p class="uebertitel">_ CASSARINO Kontakt _</p>
+            <h2 class="sektion-h2">Zögern Sie nicht, uns zu kontaktieren.</h2>
+        </div>
+
+        <div class="kontakt-grid">
+            <!-- Kontaktinfos links -->
+            <div class="fade-in">
+                <ul class="kontakt-info-liste">
+                    <li>
+                        <svg class="info-ikone" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                            <path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.8 19.79 19.79 0 01.01 1.18 2 2 0 012 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 14.92v2z" transform="translate(1,1)"/>
+                        </svg>
+                        <div><strong>Telefon</strong><a href="tel:+4917642568906">0176 42568906</a></div>
+                    </li>
+                    <li>
+                        <svg class="info-ikone" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                            <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/>
+                        </svg>
+                        <!-- TODO: Echte E-Mail-Adresse eintragen -->
+                        <div><strong>E-Mail</strong><a href="mailto:placeholder@cassarino.de">placeholder@cassarino.de</a></div>
+                    </li>
+                    <li>
+                        <svg class="info-ikone" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                            <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/>
+                        </svg>
+                        <div><strong>Adresse</strong>Karlstraße 11, 78073 Bad Dürrheim</div>
+                    </li>
+                </ul>
+                <a href="https://wa.me/4917642568906" class="btn-whatsapp" target="_blank" rel="noopener noreferrer">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                        <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+                    </svg>
+                    WhatsApp schreiben
+                </a>
+            </div>
+
+            <!-- Kontaktformular rechts -->
+            <div class="fade-in">
+                <form class="kontakt-form" onsubmit="return false;" novalidate>
+                    <div class="form-feld">
+                        <label for="name">Name *</label>
+                        <input type="text" id="name" placeholder="Ihr vollständiger Name" autocomplete="name">
+                    </div>
+                    <div class="form-feld">
+                        <label for="firma">Firma <span style="font-weight:400;opacity:.65;">(optional)</span></label>
+                        <input type="text" id="firma" placeholder="Ihr Unternehmen" autocomplete="organization">
+                    </div>
+                    <div class="form-feld">
+                        <label for="telefon">Telefon *</label>
+                        <input type="tel" id="telefon" placeholder="Ihre Telefonnummer" autocomplete="tel">
+                    </div>
+                    <div class="form-feld">
+                        <label for="dienstleistung">Dienstleistung</label>
+                        <select id="dienstleistung">
+                            <option value="" disabled selected>Bitte wählen …</option>
+                            <option>Büroreinigung</option>
+                            <option>Unterhaltsreinigung</option>
+                            <option>Glasreinigung</option>
+                            <option>Sonstiges</option>
+                        </select>
+                    </div>
+                    <div class="form-feld">
+                        <label for="nachricht">Nachricht</label>
+                        <textarea id="nachricht" placeholder="Wie können wir Ihnen helfen?"></textarea>
+                    </div>
+                    <button type="submit" class="btn-senden">Nachricht senden</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+         GOOGLE MAPS (volle Breite, 400px)
+    ============================================================ -->
+    <div class="maps-container">
+        <iframe src="https://maps.google.com/maps?q=Karlstra%C3%9Fe+11%2C+78073+Bad+D%C3%BCrrheim&output=embed"
+                loading="lazy" referrerpolicy="no-referrer-when-downgrade"
+                title="CASSARINO GmbH – Standort Bad Dürrheim"></iframe>
+    </div>
+
+    <!-- ============================================================
+         FOOTER
+    ============================================================ -->
+    <footer>
+        <div class="footer-grid">
+            <div>
+                <img src="./logo.webp" alt="CASSARINO GmbH" class="footer-logo">
+                <p class="footer-beschreibung">Professionelle Gebäudereinigung in Baden-Württemberg. Seit 2015 Ihr zuverlässiger Partner.</p>
+            </div>
+            <div>
+                <p class="footer-titel">Öffnungszeiten</p>
+                <div class="footer-info">Montag – Freitag<br>08:00 – 18:00 Uhr</div>
+            </div>
+            <div>
+                <p class="footer-titel">Kontakt</p>
+                <div class="footer-info">
+                    Karlstraße 11<br>78073 Bad Dürrheim<br><br>
+                    <a href="tel:+4917642568906">0176 42568906</a>
+                </div>
+                <!-- Social Icons im Footer -->
+                <div class="footer-social">
+                    <!-- TODO: Social-Links eintragen -->
+                    <a href="https://instagram.com/TODO" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+                        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+                    </a>
+                    <a href="https://facebook.com/TODO" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
+                        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+                    </a>
+                    <a href="https://tiktok.com/@TODO" target="_blank" rel="noopener noreferrer" aria-label="TikTok">
+                        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.27 6.27 0 00-.79-.05 6.34 6.34 0 00-6.34 6.34 6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.33-6.34V8.69a8.28 8.28 0 004.86 1.55V6.79a4.85 4.85 0 01-1.09-.1z"/></svg>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <p class="footer-copy">© 2025 CASSARINO GmbH Gebäudereinigung · Alle Rechte vorbehalten</p>
+    </footer>
+
+    <!-- ============================================================
+         JAVASCRIPT
+    ============================================================ -->
+    <script>
+        // ---- Seiten-Fade-In nach dem Laden ----
+        document.addEventListener('DOMContentLoaded', function () {
+            document.body.classList.add('geladen');
+        });
+
+        // ---- Nav-Übergang: Fade-Out bei internen Links ----
+        document.querySelectorAll('a[href]').forEach(function (link) {
+            var href = link.getAttribute('href');
+            // Nur interne HTML-Seiten (keine Anker, keine externen, keine Protokoll-Links)
+            if (href && !href.startsWith('#') && !href.startsWith('http') &&
+                !href.startsWith('tel:') && !href.startsWith('mailto:') &&
+                !href.startsWith('wa.') && href.endsWith('.html')) {
+                link.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    document.body.style.transition = 'opacity 0.3s ease';
+                    document.body.style.opacity = '0';
+                    setTimeout(function () { window.location.href = href; }, 320);
+                });
+            }
+        });
+
+        // ---- Header: Box-Shadow beim Scrollen ----
+        var header = document.getElementById('haupt-header');
+        window.addEventListener('scroll', function () {
+            header.classList.toggle('gescrollt', window.scrollY > 30);
+        }, { passive: true });
+
+        // ---- Hamburger-Menü (mobile) ----
+        var hamburger = document.getElementById('hamburger');
+        var nav = document.getElementById('haupt-nav');
+        hamburger.addEventListener('click', function () {
+            var offen = nav.classList.toggle('offen');
+            hamburger.setAttribute('aria-expanded', String(offen));
+        });
+        nav.querySelectorAll('a').forEach(function (link) {
+            link.addEventListener('click', function () {
+                nav.classList.remove('offen');
+                hamburger.setAttribute('aria-expanded', 'false');
+            });
+        });
+
+        // ---- Intro-Animation: Fensterabzieher ----
+        (function () {
+            var overlay = document.getElementById('intro-overlay');
+            var wischer = document.getElementById('intro-wischer');
+            if (!overlay || !wischer) return;
+
+            setTimeout(function () {
+                // Wischer fährt von -10% nach 110% (0.8s)
+                wischer.style.left = '110%';
+                // Overlay clippt gleichzeitig von links weg
+                overlay.style.clipPath = 'inset(0 0 0 100%)';
+                // Nach Abschluss Elemente entfernen
+                setTimeout(function () {
+                    overlay.style.display = 'none';
+                    wischer.style.display = 'none';
+                }, 900);
+            }, 800);
+        })();
+
+        // ---- Hero Slider (Auto-Play 5s, Fade) ----
+        (function () {
+            var slides  = document.querySelectorAll('.slide');
+            var punkte  = document.querySelectorAll('.punkt');
+            if (!slides.length) return;
+
+            var aktiver = 0;
+            var interval;
+
+            function slideZeigen(idx) {
+                slides[aktiver].classList.remove('aktiv');
+                punkte[aktiver].classList.remove('aktiv');
+                punkte[aktiver].setAttribute('aria-selected', 'false');
+                aktiver = (idx + slides.length) % slides.length;
+                slides[aktiver].classList.add('aktiv');
+                punkte[aktiver].classList.add('aktiv');
+                punkte[aktiver].setAttribute('aria-selected', 'true');
+            }
+
+            function sliderStart() {
+                interval = setInterval(function () { slideZeigen(aktiver + 1); }, 5000);
+            }
+
+            punkte.forEach(function (p) {
+                p.addEventListener('click', function () {
+                    clearInterval(interval);
+                    slideZeigen(parseInt(p.dataset.index, 10));
+                    sliderStart();
+                });
+            });
+
+            sliderStart();
+        })();
+
+        // ---- IntersectionObserver: Fade-In Animationen ----
+        (function () {
+            var elemente = document.querySelectorAll('.fade-in');
+            var beobachter = new IntersectionObserver(function (eintraege) {
+                eintraege.forEach(function (eintrag) {
+                    if (eintrag.isIntersecting) {
+                        eintrag.target.classList.add('sichtbar');
+                        beobachter.unobserve(eintrag.target);
+                    }
+                });
+            }, { threshold: 0.1 });
+            elemente.forEach(function (el) { beobachter.observe(el); });
+        })();
+
+        // ---- Counter-Animation (zählt hoch wenn Stats sichtbar) ----
+        (function () {
+            var zahlen = document.querySelectorAll('.stat-zahl[data-ziel]');
+            if (!zahlen.length) return;
+
+            var gelaufen = false;
+
+            function animieren() {
+                if (gelaufen) return;
+                gelaufen = true;
+                zahlen.forEach(function (el) {
+                    var ziel      = parseInt(el.dataset.ziel, 10);
+                    var suffix    = el.dataset.suffix || '';
+                    var dauer     = 1400;
+                    var fps       = 60;
+                    var schritte  = dauer / (1000 / fps);
+                    var inkrement = ziel / schritte;
+                    var aktuell   = 0;
+
+                    var timer = setInterval(function () {
+                        aktuell += inkrement;
+                        if (aktuell >= ziel) {
+                            el.textContent = ziel + suffix;
+                            clearInterval(timer);
+                        } else {
+                            el.textContent = Math.floor(aktuell) + suffix;
+                        }
+                    }, 1000 / fps);
+                });
+            }
+
+            var statsGrid = document.querySelector('.stats-grid');
+            if (statsGrid) {
+                new IntersectionObserver(function (eintraege) {
+                    if (eintraege[0].isIntersecting) { animieren(); }
+                }, { threshold: 0.3 }).observe(statsGrid);
+            }
+        })();
+    </script>
+</body>
+</html>

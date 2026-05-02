@@ -1,0 +1,1084 @@
+/* ============================================================
+   CASSARINO GmbH – Gemeinsames Stylesheet (style.css)
+   Gilt für index.html + alle Unterseiten
+   Google Fonts werden in jedem HTML-<head> eingebunden
+============================================================ */
+
+/* ---- CSS-Variablen (Design-Tokens) ---- */
+:root {
+    --weinrot:      #8B1A4A;
+    --weinrot-dk:   #6B1238;
+    --bg-weiss:     #FFFFFF;
+    --bg-section:   #F9F5F7;
+    --bg-dunkel:    #1A0A0F;
+    --text-dunkel:  #1A0A0F;
+    --text-hell:    #FFFFFF;
+    --grenze:       #E8D5DE;
+    --text-mittel:  #4a3040;
+}
+
+/* ---- Reset & Basis ---- */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+
+body {
+    font-family: 'Inter', sans-serif;
+    color: var(--text-dunkel);
+    background: var(--bg-weiss);
+    overflow-x: hidden;
+    opacity: 0;                     /* Startet unsichtbar für Seiten-Fade-In */
+    transition: opacity 0.4s ease;
+}
+
+/* Body wird nach dem Laden sichtbar */
+body.geladen { opacity: 1; }
+
+/* ============================================================
+   FADE-IN (IntersectionObserver)
+============================================================ */
+.fade-in {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.fade-in.sichtbar {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Gestaffelte Verzögerungen für Karten-Gruppen */
+.cards-grid .fade-in:nth-child(2) { transition-delay: 0.1s; }
+.cards-grid .fade-in:nth-child(3) { transition-delay: 0.2s; }
+.ablauf-reihe .schritt:nth-child(3) { transition-delay: 0.1s; }
+.ablauf-reihe .schritt:nth-child(5) { transition-delay: 0.2s; }
+
+/* ============================================================
+   TOP-BAR (weinrot, dauerhaft sichtbar)
+============================================================ */
+.top-bar {
+    background: var(--weinrot);
+    color: var(--text-hell);
+    font-size: 0.79rem;
+    padding: 8px 5%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+}
+
+.top-bar-item {
+    display: flex;
+    align-items: center;
+    gap: 0.45rem;
+    white-space: nowrap;
+}
+
+.top-bar a {
+    color: inherit;
+    text-decoration: none;
+    transition: opacity 0.2s;
+}
+
+.top-bar a:hover { opacity: 0.75; }
+
+.top-bar svg {
+    width: 13px;
+    height: 13px;
+    flex-shrink: 0;
+}
+
+/* Social-Icons in der Top-Bar */
+.social-icons {
+    display: flex;
+    gap: 0.9rem;
+    align-items: center;
+}
+
+.social-icons a {
+    color: var(--text-hell);
+    text-decoration: none;
+    line-height: 0;
+    transition: opacity 0.2s;
+}
+
+.social-icons a:hover { opacity: 0.7; }
+
+.social-icons svg {
+    width: 16px;
+    height: 16px;
+}
+
+/* ============================================================
+   HEADER (sticky, weiß)
+============================================================ */
+header {
+    position: sticky;
+    top: 0;
+    z-index: 900;
+    background: var(--bg-weiss);
+    padding: 14px 5%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    transition: box-shadow 0.3s;
+}
+
+header.gescrollt {
+    box-shadow: 0 2px 20px rgba(139, 26, 74, 0.14);
+}
+
+.header-logo a { display: block; line-height: 0; }
+
+/* Navigation */
+nav {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+}
+
+nav a {
+    color: var(--text-dunkel);
+    text-decoration: none;
+    font-size: 0.88rem;
+    font-weight: 500;
+    padding-bottom: 3px;
+    border-bottom: 2px solid transparent;
+    transition: color 0.25s, border-color 0.25s;
+}
+
+/* Hover + Aktiver Link: weinroter Unterstrich */
+nav a:hover,
+nav a.aktiv {
+    color: var(--weinrot);
+    border-bottom-color: var(--weinrot);
+}
+
+/* CTA-Button im Nav */
+.btn-anfragen {
+    background: var(--weinrot);
+    color: var(--text-hell) !important;
+    padding: 10px 22px;
+    border-radius: 4px;
+    font-weight: 600;
+    font-size: 0.86rem;
+    border-bottom: none !important;
+    transition: background 0.25s, transform 0.2s;
+    white-space: nowrap;
+}
+
+.btn-anfragen:hover {
+    background: var(--weinrot-dk);
+    transform: translateY(-1px);
+}
+
+/* Hamburger-Button (mobile) */
+.hamburger {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 5px;
+}
+
+.hamburger span {
+    display: block;
+    width: 25px;
+    height: 2px;
+    background: var(--text-dunkel);
+    border-radius: 2px;
+    transition: all 0.3s;
+}
+
+/* ============================================================
+   BUTTONS (global)
+============================================================ */
+.btn-gefuellt {
+    display: inline-block;
+    background: var(--weinrot);
+    color: var(--text-hell);
+    padding: 14px 34px;
+    border-radius: 4px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.95rem;
+    transition: background 0.25s, transform 0.2s;
+}
+
+.btn-gefuellt:hover {
+    background: var(--weinrot-dk);
+    transform: translateY(-2px);
+}
+
+.btn-outline-hell {
+    display: inline-block;
+    border: 2px solid var(--text-hell);
+    color: var(--text-hell);
+    padding: 12px 32px;
+    border-radius: 4px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.95rem;
+    transition: background 0.25s, color 0.25s;
+}
+
+.btn-outline-hell:hover {
+    background: var(--text-hell);
+    color: var(--text-dunkel);
+}
+
+.btn-whatsapp {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    background: #25D366;
+    color: var(--text-hell);
+    padding: 13px 26px;
+    border-radius: 4px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.93rem;
+    margin-top: 2rem;
+    transition: background 0.25s, transform 0.2s;
+}
+
+.btn-whatsapp:hover {
+    background: #1da851;
+    transform: translateY(-1px);
+}
+
+/* ============================================================
+   HERO SLIDER (index.html)
+============================================================ */
+.hero {
+    position: relative;
+    height: 100vh;
+    min-height: 620px;
+    overflow: hidden;
+}
+
+.slide {
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    transition: opacity 1s ease-in-out;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.slide.aktiv { opacity: 1; }
+
+.slide-bg {
+    position: absolute;
+    inset: 0;
+    background-size: cover;
+    background-position: center;
+}
+
+.slide-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(26, 10, 15, 0.65);
+}
+
+.slide-content {
+    position: relative;
+    z-index: 2;
+    max-width: 820px;
+    padding: 0 24px;
+}
+
+.slide-content h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 700;
+    font-size: clamp(2rem, 5vw, 3.8rem);
+    line-height: 1.2;
+    color: var(--text-hell);
+    margin-bottom: 1rem;
+    text-shadow: 0 2px 14px rgba(0, 0, 0, 0.45);
+}
+
+.slide-content p {
+    font-size: clamp(1rem, 2vw, 1.2rem);
+    color: rgba(255, 255, 255, 0.88);
+    margin-bottom: 2.2rem;
+}
+
+.slide-btns {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.slider-punkte {
+    position: absolute;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 10px;
+    z-index: 10;
+}
+
+.punkt {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.38);
+    border: none;
+    cursor: pointer;
+    transition: background 0.3s;
+    padding: 0;
+}
+
+.punkt.aktiv { background: var(--weinrot); }
+
+/* ============================================================
+   HERO UNTERSEITE (einzelnes Bild, kein Slider)
+============================================================ */
+.hero-single {
+    position: relative;
+    height: 52vh;
+    min-height: 380px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    overflow: hidden;
+}
+
+.hero-single .hero-bg {
+    position: absolute;
+    inset: 0;
+    background-size: cover;
+    background-position: center;
+}
+
+.hero-single .hero-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(26, 10, 15, 0.65);
+}
+
+.hero-single .hero-content {
+    position: relative;
+    z-index: 2;
+    padding: 0 24px;
+    max-width: 820px;
+}
+
+.hero-single h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 700;
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    color: var(--text-hell);
+    line-height: 1.2;
+    margin-bottom: 0.8rem;
+    text-shadow: 0 2px 12px rgba(0, 0, 0, 0.4);
+}
+
+.hero-single p {
+    font-size: clamp(0.95rem, 2vw, 1.15rem);
+    color: rgba(255, 255, 255, 0.88);
+}
+
+/* ============================================================
+   SEKTION-LAYOUT & ÜBERTITEL
+============================================================ */
+.sektion { padding: 100px 5%; }
+.sektion-weiss { background: var(--bg-weiss); }
+.sektion-grau  { background: var(--bg-section); }
+
+.sektion-kopf {
+    text-align: center;
+    max-width: 680px;
+    margin: 0 auto 4rem;
+}
+
+.uebertitel {
+    font-size: 0.78rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--weinrot);
+    margin-bottom: 0.9rem;
+    font-weight: 500;
+}
+
+.sektion-h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 700;
+    font-size: clamp(2rem, 3.5vw, 2.8rem);
+    line-height: 1.22;
+    color: var(--text-dunkel);
+}
+
+/* ============================================================
+   ÜBER UNS (index.html)
+============================================================ */
+.ueber-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 5rem;
+    max-width: 1200px;
+    margin: 0 auto;
+    align-items: center;
+}
+
+.ueber-text {
+    font-size: 1rem;
+    line-height: 1.82;
+    color: var(--text-mittel);
+    margin-top: 1.2rem;
+}
+
+.stats-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+}
+
+.stat-karte {
+    background: var(--bg-weiss);
+    border-radius: 8px;
+    padding: 2rem 1.5rem;
+    text-align: center;
+    border-left: 4px solid var(--weinrot);
+    box-shadow: 0 2px 14px rgba(139, 26, 74, 0.07);
+}
+
+.stat-zahl {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 700;
+    font-size: 2.6rem;
+    color: var(--weinrot);
+    display: block;
+    line-height: 1;
+}
+
+.stat-label {
+    display: block;
+    font-size: 0.84rem;
+    margin-top: 0.5rem;
+    color: #6b4f5f;
+}
+
+/* ============================================================
+   LEISTUNGEN CARDS (index.html, klickbar → Unterseiten)
+============================================================ */
+.cards-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.leistungs-karte {
+    border: 1px solid var(--grenze);
+    border-radius: 8px;
+    padding: 2.5rem 2rem;
+    background: var(--bg-weiss);
+    text-decoration: none;
+    color: inherit;
+    display: block;
+    cursor: pointer;
+    transition: transform 0.3s, border-color 0.3s, box-shadow 0.3s;
+}
+
+.leistungs-karte:hover {
+    transform: translateY(-6px);
+    border-color: var(--weinrot);
+    box-shadow: 0 14px 36px rgba(139, 26, 74, 0.13);
+}
+
+.karte-icon {
+    width: 52px;
+    height: 52px;
+    color: var(--weinrot);
+    margin-bottom: 1.4rem;
+}
+
+.leistungs-karte h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 700;
+    font-size: 1.45rem;
+    margin-bottom: 0.9rem;
+}
+
+.leistungs-karte p {
+    font-size: 0.93rem;
+    line-height: 1.75;
+    color: var(--text-mittel);
+}
+
+/* ============================================================
+   WARUM CASSARINO
+============================================================ */
+.warum-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 5rem;
+    max-width: 1200px;
+    margin: 0 auto;
+    align-items: center;
+}
+
+.warum-bild img {
+    width: 100%;
+    height: 460px;
+    object-fit: cover;
+    border-radius: 8px;
+    display: block;
+}
+
+.checklist { list-style: none; margin-top: 1.5rem; }
+
+.checklist li {
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+    padding: 0.8rem 0;
+    color: #3a2030;
+    font-size: 0.97rem;
+    border-bottom: 1px solid rgba(139, 26, 74, 0.1);
+}
+
+.checklist li:last-child { border-bottom: none; }
+
+.haken {
+    color: var(--weinrot);
+    font-size: 1.1rem;
+    font-weight: 700;
+    flex-shrink: 0;
+    line-height: 1.5;
+}
+
+/* ============================================================
+   ABLAUF
+============================================================ */
+.ablauf-kopf {
+    text-align: center;
+    max-width: 600px;
+    margin: 0 auto 5rem;
+}
+
+.ablauf-zitat {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-weight: 600;
+    font-size: clamp(2.2rem, 4.5vw, 3.2rem);
+    color: var(--weinrot);
+    margin: 0.6rem 0 1rem;
+}
+
+.ablauf-beschreibung {
+    font-size: 0.97rem;
+    line-height: 1.75;
+    color: #6b4f5f;
+}
+
+/* Flex-Reihe: Schritt – Linie – Schritt – Linie – Schritt */
+.ablauf-reihe {
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.schritt {
+    flex: 1;
+    text-align: center;
+    padding: 0 1rem;
+}
+
+/* Gestrichelte Verbindungslinie zwischen den Kreisen */
+.ablauf-linie {
+    flex-shrink: 0;
+    width: 80px;
+    border-top: 2px dashed var(--grenze);
+    margin-top: 45px;
+    align-self: flex-start;
+}
+
+.schritt-kreis-wrapper {
+    position: relative;
+    display: inline-block;
+    margin-bottom: 1.6rem;
+}
+
+.schritt-kreis {
+    width: 90px;
+    height: 90px;
+    background: var(--bg-section);
+    border-radius: 50%;
+    border: 2px solid var(--grenze);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.schritt-kreis svg {
+    width: 36px;
+    height: 36px;
+    color: var(--weinrot);
+}
+
+.schritt-num {
+    position: absolute;
+    top: -4px;
+    right: -4px;
+    width: 22px;
+    height: 22px;
+    background: var(--weinrot);
+    color: var(--text-hell);
+    border-radius: 50%;
+    font-size: 0.68rem;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.schritt h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 700;
+    font-size: 1.15rem;
+    color: var(--weinrot);
+    margin-bottom: 0.6rem;
+}
+
+.schritt p {
+    font-size: 0.9rem;
+    line-height: 1.75;
+    color: var(--text-mittel);
+}
+
+/* ============================================================
+   KONTAKT
+============================================================ */
+.kontakt-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 5rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.kontakt-info-liste { list-style: none; }
+
+.kontakt-info-liste li {
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+    padding: 1rem 0;
+    border-bottom: 1px solid rgba(139, 26, 74, 0.1);
+    color: #3a2030;
+}
+
+.kontakt-info-liste li:last-child { border-bottom: none; }
+
+.info-ikone {
+    width: 22px;
+    height: 22px;
+    color: var(--weinrot);
+    flex-shrink: 0;
+    margin-top: 2px;
+}
+
+.kontakt-info-liste strong {
+    display: block;
+    font-size: 0.79rem;
+    color: var(--weinrot);
+    margin-bottom: 0.2rem;
+    letter-spacing: 0.05em;
+}
+
+.kontakt-info-liste a {
+    color: inherit;
+    text-decoration: none;
+    transition: color 0.25s;
+}
+
+.kontakt-info-liste a:hover { color: var(--weinrot); }
+
+/* Formular */
+.kontakt-form { display: flex; flex-direction: column; gap: 1rem; }
+.form-feld { display: flex; flex-direction: column; gap: 0.35rem; }
+.form-feld label { font-size: 0.8rem; font-weight: 500; color: #6b4f5f; }
+
+.form-feld input,
+.form-feld select,
+.form-feld textarea {
+    width: 100%;
+    padding: 12px 15px;
+    border: 1.5px solid var(--grenze);
+    border-radius: 4px;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.92rem;
+    color: var(--text-dunkel);
+    background: var(--bg-weiss);
+    outline: none;
+    transition: border-color 0.25s;
+}
+
+.form-feld input:focus,
+.form-feld select:focus,
+.form-feld textarea:focus { border-color: var(--weinrot); }
+
+.form-feld textarea { resize: vertical; min-height: 120px; }
+
+.btn-senden {
+    background: var(--weinrot);
+    color: var(--text-hell);
+    padding: 14px;
+    border: none;
+    border-radius: 4px;
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 700;
+    font-size: 1.1rem;
+    cursor: pointer;
+    margin-top: 0.4rem;
+    width: 100%;
+    transition: background 0.25s, transform 0.2s;
+}
+
+.btn-senden:hover { background: var(--weinrot-dk); transform: translateY(-1px); }
+
+/* ============================================================
+   GOOGLE MAPS
+============================================================ */
+.maps-container { width: 100%; height: 400px; line-height: 0; }
+.maps-container iframe { width: 100%; height: 100%; border: none; display: block; }
+
+/* ============================================================
+   FOOTER
+============================================================ */
+footer {
+    background: var(--bg-dunkel);
+    color: var(--text-hell);
+    padding: 64px 5% 0;
+}
+
+.footer-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1.2fr;
+    gap: 3rem;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding-bottom: 3rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.09);
+}
+
+.footer-logo {
+    max-height: 50px;
+    opacity: 0.8;
+    display: block;
+    margin-bottom: 1rem;
+}
+
+.footer-beschreibung {
+    font-size: 0.88rem;
+    line-height: 1.75;
+    opacity: 0.58;
+    max-width: 290px;
+}
+
+.footer-titel {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1rem;
+    letter-spacing: 0.08em;
+    color: var(--weinrot);
+    margin-bottom: 1.2rem;
+}
+
+.footer-info { font-size: 0.88rem; line-height: 1.9; opacity: 0.62; }
+.footer-info a { color: inherit; text-decoration: none; transition: color 0.25s; }
+.footer-info a:hover { color: var(--weinrot); }
+
+.footer-social { display: flex; gap: 1rem; margin-top: 1rem; }
+.footer-social a { color: var(--text-hell); opacity: 0.6; line-height: 0; transition: opacity 0.25s; }
+.footer-social a:hover { opacity: 1; }
+.footer-social svg { width: 18px; height: 18px; }
+
+.footer-copy {
+    text-align: center;
+    font-size: 0.82rem;
+    opacity: 0.32;
+    padding: 2rem 0 2.5rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* ============================================================
+   UNTERSEITE – DETAIL-SEKTION (2 Spalten)
+============================================================ */
+.detail-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 5rem;
+    max-width: 1200px;
+    margin: 0 auto;
+    align-items: center;
+}
+
+/* Weinroter Unterstrich-Akzent unter der Headline */
+.detail-akzent {
+    display: inline-block;
+    width: 52px;
+    height: 3px;
+    background: var(--weinrot);
+    margin: 0.5rem 0 1.5rem;
+    border-radius: 2px;
+}
+
+.detail-text {
+    font-size: 1rem;
+    line-height: 1.82;
+    color: var(--text-mittel);
+    margin-bottom: 1.5rem;
+}
+
+.detail-bild img {
+    width: 100%;
+    height: 500px;
+    object-fit: cover;
+    border-radius: 8px;
+    display: block;
+}
+
+/* ============================================================
+   VORHER/NACHHER SLIDER
+============================================================ */
+.vn-wrapper { max-width: 1200px; margin: 0 auto; }
+
+.vorher-nachher {
+    position: relative;
+    width: 100%;
+    height: 480px;
+    border-radius: 8px;
+    overflow: hidden;
+    cursor: ew-resize;
+    user-select: none;
+}
+
+.vn-after,
+.vn-before {
+    position: absolute;
+    inset: 0;
+}
+
+.vn-after img,
+.vn-before img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    pointer-events: none;
+}
+
+/* Vorher-Bild: leicht entsättigt und dunkler */
+.vn-before img { filter: grayscale(35%) brightness(0.72); }
+
+/* Startet bei 50% Teilung */
+.vn-before { clip-path: inset(0 50% 0 0); }
+
+.vn-label {
+    position: absolute;
+    bottom: 16px;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    color: var(--text-hell);
+    background: rgba(0, 0, 0, 0.52);
+    padding: 4px 10px;
+    border-radius: 3px;
+}
+
+.vn-label-links { left: 16px; }
+.vn-label-rechts { right: 16px; }
+
+/* Trennlinie */
+.vn-handle {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    width: 3px;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.88);
+    transform: translateX(-50%);
+    z-index: 5;
+    cursor: ew-resize;
+}
+
+/* Runder Anfasser in der Mitte der Linie */
+.vn-kreis {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: var(--weinrot);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 3px;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.4);
+    z-index: 6;
+}
+
+.vn-kreis svg { width: 13px; height: 13px; color: var(--text-hell); }
+
+/* ============================================================
+   FAQ ACCORDION
+============================================================ */
+.faq-container { max-width: 800px; margin: 0 auto; }
+
+.faq-item {
+    border: 1px solid var(--grenze);
+    border-radius: 6px;
+    margin-bottom: 1rem;
+    overflow: hidden;
+}
+
+.faq-frage {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+    padding: 1.2rem 1.5rem;
+    background: var(--bg-weiss);
+    border: none;
+    border-left: 3px solid transparent;
+    cursor: pointer;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.96rem;
+    font-weight: 500;
+    color: var(--text-dunkel);
+    text-align: left;
+    transition: background 0.2s, border-left-color 0.2s, color 0.2s;
+}
+
+.faq-frage:hover { background: var(--bg-section); }
+
+/* Aktive Frage: weinroter linker Rand */
+.faq-frage.aktiv {
+    border-left-color: var(--weinrot);
+    color: var(--weinrot);
+    background: var(--bg-section);
+}
+
+.faq-pfeil {
+    width: 18px;
+    height: 18px;
+    flex-shrink: 0;
+    color: var(--weinrot);
+    transition: transform 0.3s;
+}
+
+.faq-frage.aktiv .faq-pfeil { transform: rotate(180deg); }
+
+/* Antwort: max-height Animation */
+.faq-antwort { max-height: 0; overflow: hidden; transition: max-height 0.35s ease; }
+.faq-item.offen .faq-antwort { max-height: 300px; }
+
+.faq-antwort-inhalt {
+    padding: 0 1.5rem 1.2rem;
+    font-size: 0.93rem;
+    line-height: 1.75;
+    color: var(--text-mittel);
+}
+
+/* ============================================================
+   RESPONSIVE – TABLET (max 1024px)
+============================================================ */
+@media (max-width: 1024px) {
+    .cards-grid { grid-template-columns: 1fr 1fr; }
+    .footer-grid { grid-template-columns: 1fr 1fr; }
+    .footer-grid > :first-child { grid-column: 1 / -1; }
+    .footer-beschreibung { max-width: 100%; }
+}
+
+/* ============================================================
+   RESPONSIVE – ABLAUF VERTIKAL (max 900px)
+============================================================ */
+@media (max-width: 900px) {
+    .ablauf-reihe {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .schritt { max-width: 360px; padding: 0; }
+
+    /* Linie wird vertikal */
+    .ablauf-linie {
+        width: 2px;
+        height: 36px;
+        border-top: none;
+        border-left: 2px dashed var(--grenze);
+        margin-top: 0;
+    }
+}
+
+/* ============================================================
+   RESPONSIVE – MOBIL (max 768px)
+============================================================ */
+@media (max-width: 768px) {
+    /* Hamburger einblenden, Desktop-Nav ausblenden */
+    .hamburger { display: flex; }
+
+    nav {
+        display: none;
+        flex-direction: column;
+        align-items: flex-start;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background: var(--bg-weiss);
+        padding: 20px 5%;
+        gap: 1.2rem;
+        border-top: 1px solid var(--grenze);
+        box-shadow: 0 4px 14px rgba(139, 26, 74, 0.09);
+        z-index: 800;
+    }
+
+    nav.offen { display: flex; }
+
+    /* Zweispaltige Layouts → einspaltig */
+    .ueber-grid,
+    .warum-grid,
+    .kontakt-grid,
+    .detail-grid { grid-template-columns: 1fr; gap: 3rem; }
+
+    .cards-grid { grid-template-columns: 1fr; }
+    .stats-grid { grid-template-columns: 1fr 1fr; }
+
+    .warum-bild img,
+    .detail-bild img { height: 280px; }
+
+    .footer-grid { grid-template-columns: 1fr; gap: 2rem; }
+    .vorher-nachher { height: 300px; }
+    .sektion { padding: 70px 5%; }
+}
+
+/* ============================================================
+   RESPONSIVE – KLEIN-MOBIL (max 480px)
+============================================================ */
+@media (max-width: 480px) {
+    /* Top-Bar: nur Telefon zeigen, Rest ausblenden */
+    .top-bar { flex-direction: column; gap: 5px; padding: 10px 5%; text-align: center; }
+    .top-bar-item-email { display: none; }
+
+    .stats-grid { grid-template-columns: 1fr; }
+    .slide-btns { flex-direction: column; align-items: center; }
+    .detail-bild img { height: 220px; }
+}
