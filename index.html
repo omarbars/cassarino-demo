@@ -654,6 +654,24 @@
                 }, { threshold: 0.3 }).observe(statsGrid);
             }
         })();
+
+        // ---- Scroll-Position speichern wenn User auf Leistungs-Karte klickt ----
+        document.querySelectorAll('a.leistungs-karte').forEach(function (link) {
+            link.addEventListener('click', function () {
+                sessionStorage.setItem('scrollPos', window.scrollY);
+            });
+        });
+
+        // ---- Scroll-Position wiederherstellen nach Browser-Zurück ----
+        window.addEventListener('load', function () {
+            var scrollPos = sessionStorage.getItem('scrollPos');
+            if (scrollPos) {
+                setTimeout(function () {
+                    window.scrollTo({ top: parseInt(scrollPos, 10), behavior: 'instant' });
+                    sessionStorage.removeItem('scrollPos');
+                }, 100);
+            }
+        });
     </script>
 </body>
 </html>

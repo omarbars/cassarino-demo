@@ -387,6 +387,17 @@ nav a.aktiv {
     color: rgba(255, 255, 255, 0.88);
 }
 
+.back-btn {
+    display: inline-block;
+    margin-bottom: 1.2rem;
+    color: rgba(255, 255, 255, 0.75);
+    font-size: 0.9rem;
+    text-decoration: none;
+    letter-spacing: 0.03em;
+    transition: color 0.2s;
+}
+.back-btn:hover { color: #fff; }
+
 /* ============================================================
    SEKTION-LAYOUT & ÜBERTITEL
 ============================================================ */
