@@ -502,19 +502,14 @@
         });
 
         // ---- Nav-Übergang: Fade-Out bei internen Links ----
-        document.querySelectorAll('a[href]').forEach(function (link) {
-            var href = link.getAttribute('href');
-            // Nur interne HTML-Seiten (keine Anker, keine externen, keine Protokoll-Links)
-            if (href && !href.startsWith('#') && !href.startsWith('http') &&
-                !href.startsWith('tel:') && !href.startsWith('mailto:') &&
-                !href.startsWith('wa.') && href.endsWith('.html')) {
-                link.addEventListener('click', function (e) {
-                    e.preventDefault();
-                    document.body.style.transition = 'opacity 0.3s ease';
-                    document.body.style.opacity = '0';
-                    setTimeout(function () { window.location.href = href; }, 320);
-                });
-            }
+        document.querySelectorAll('a[href$=".html"]').forEach(function (link) {
+            link.addEventListener('click', function (e) {
+                e.preventDefault();
+                var href = this.getAttribute('href');
+                document.body.style.transition = 'opacity 0.3s';
+                document.body.style.opacity = '0';
+                setTimeout(function () { window.location.href = href; }, 300);
+            });
         });
 
         // ---- Header: Box-Shadow beim Scrollen ----
@@ -655,23 +650,6 @@
             }
         })();
 
-        // ---- Scroll-Position speichern wenn User auf Leistungs-Karte klickt ----
-        document.querySelectorAll('a.leistungs-karte').forEach(function (link) {
-            link.addEventListener('click', function () {
-                sessionStorage.setItem('scrollPos', window.scrollY);
-            });
-        });
-
-        // ---- Scroll-Position wiederherstellen nach Browser-Zurück ----
-        window.addEventListener('load', function () {
-            var scrollPos = sessionStorage.getItem('scrollPos');
-            if (scrollPos) {
-                setTimeout(function () {
-                    window.scrollTo({ top: parseInt(scrollPos, 10), behavior: 'instant' });
-                    sessionStorage.removeItem('scrollPos');
-                }, 100);
-            }
-        });
     </script>
 </body>
 </html>

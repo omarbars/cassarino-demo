@@ -73,7 +73,7 @@
         <div class="hero-bg" style="background-image:url('https://images.unsplash.com/photo-1600585154526-990dced4db0d?w=1600');"></div>
         <div class="hero-overlay"></div>
         <div class="hero-content">
-            <a class="back-btn" href="#">← Zurück zur Startseite</a>
+            <a class="back-btn" href="index.html#leistungen">← Zurück</a>
             <h1>Glasreinigung in Bad Dürrheim</h1>
             <p>Streifenfrei, kristallklar und professionell – für Ihren perfekten ersten Eindruck.</p>
         </div>
@@ -322,18 +322,14 @@
         })();
 
         // ---- Nav-Übergang: Fade-Out bei internen Links ----
-        document.querySelectorAll('a[href]').forEach(function (link) {
-            var href = link.getAttribute('href');
-            if (href && !href.startsWith('#') && !href.startsWith('http') &&
-                !href.startsWith('tel:') && !href.startsWith('mailto:') &&
-                !href.startsWith('wa.') && href.endsWith('.html')) {
-                link.addEventListener('click', function (e) {
-                    e.preventDefault();
-                    document.body.style.transition = 'opacity 0.3s ease';
-                    document.body.style.opacity = '0';
-                    setTimeout(function () { window.location.href = href; }, 320);
-                });
-            }
+        document.querySelectorAll('a[href$=".html"]').forEach(function (link) {
+            link.addEventListener('click', function (e) {
+                e.preventDefault();
+                var href = this.getAttribute('href');
+                document.body.style.transition = 'opacity 0.3s';
+                document.body.style.opacity = '0';
+                setTimeout(function () { window.location.href = href; }, 300);
+            });
         });
 
         // ---- Header Scroll-Shadow ----
@@ -393,18 +389,6 @@
             handle.addEventListener('touchstart', function (e) { dragging = true; setPos(e.touches[0].clientX); }, { passive: true });
             document.addEventListener('touchend',  function ()  { dragging = false; });
             document.addEventListener('touchmove', function (e) { if (dragging) setPos(e.touches[0].clientX); }, { passive: true });
-        })();
-
-        // ---- Zurück-Button: Fade-Out + history.back() ----
-        (function () {
-            var backBtn = document.querySelector('.back-btn');
-            if (!backBtn) return;
-            backBtn.addEventListener('click', function (e) {
-                e.preventDefault();
-                document.body.style.transition = 'opacity 0.3s';
-                document.body.style.opacity = '0';
-                setTimeout(function () { history.back(); }, 300);
-            });
         })();
 
         // ---- FAQ Accordion ----
