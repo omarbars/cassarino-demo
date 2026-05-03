@@ -1,0 +1,8 @@
+{
+  "rewrites": [
+    { "source": "/", "destination": "/index.html" },
+    { "source": "/bueroreinigung", "destination": "/bueroreinigung.html" },
+    { "source": "/unterhaltsreinigung", "destination": "/unterhaltsreinigung.html" },
+    { "source": "/glasreinigung", "destination": "/glasreinigung.html" }
+  ]
+}
